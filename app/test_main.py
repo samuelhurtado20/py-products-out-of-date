@@ -21,7 +21,7 @@ def test_outdated_products_identifies_expired_items() -> None:
     # Mockeamos datetime.date.today para que siempre sea 2 de febrero de 2022
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = datetime.date(2022, 2, 2)
-        # Importante: para que el operador < funcione, el mock debe 
+        # Importante: para que el operador < funcione, el mock debe
         # devolver objetos que se puedan comparar con datetime.date
         mock_date.side_effect = (
             lambda *args, **kwargs: datetime.date(*args, **kwargs)
