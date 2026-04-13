@@ -19,7 +19,7 @@ def test_outdated_products_identifies_expired_items() -> None:
     with patch("app.main.datetime.date") as mock_date:
         # Configuramos para que today() devuelva una fecha real
         mock_date.today.return_value = datetime.date(2022, 2, 2)
-        
+
         result = outdated_products(products)
         assert result == ["duck"]
 
@@ -31,7 +31,7 @@ def test_no_outdated_products_returns_empty_list() -> None:
 
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = datetime.date(2022, 2, 2)
-        
+
         assert outdated_products(products) == []
 
 
@@ -42,5 +42,5 @@ def test_product_expiring_today_is_not_outdated() -> None:
 
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = datetime.date(2022, 2, 2)
-        
+
         assert outdated_products(products) == []
