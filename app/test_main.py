@@ -23,8 +23,9 @@ def test_outdated_products_identifies_expired_items() -> None:
         mock_date.today.return_value = datetime.date(2022, 2, 2)
         # Importante: para que el operador < funcione, el mock debe 
         # devolver objetos que se puedan comparar con datetime.date
-        mock_date.side_effect = lambda *args, **kwargs: datetime.date(*args, **kwargs)
-        
+        mock_date.side_effect = lambda *args,
+                                        **kwargs: datetime.date(*args, **kwargs)
+
         result = outdated_products(products)
         assert result == ["duck"]
 
@@ -33,11 +34,12 @@ def test_no_outdated_products_returns_empty_list() -> None:
     products = [
         {"name": "chicken", "expiration_date": datetime.date(2022, 2, 5)}
     ]
-    
+
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = datetime.date(2022, 2, 2)
-        mock_date.side_effect = lambda *args, **kwargs: datetime.date(*args, **kwargs)
-        
+        mock_date.side_effect = lambda *args,
+                                        **kwargs: datetime.date(*args, **kwargs)
+
         assert outdated_products(products) == []
 
 
@@ -46,9 +48,9 @@ def test_product_expiring_today_is_not_outdated() -> None:
     products = [
         {"name": "milk", "expiration_date": datetime.date(2022, 2, 2)}
     ]
-    
+
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = datetime.date(2022, 2, 2)
         mock_date.side_effect = lambda *args, **kwargs: datetime.date(*args, **kwargs)
-        
+
         assert outdated_products(products) == []
